@@ -1,6 +1,10 @@
+fastapi
+uvicorn[standard]
 youtube-transcript-api
-langchain-community
-langchain-openai
-faiss-cpu
-tiktoken
+langchain-core
+langchain-text-splitters
+langchain-pinecone
+langchain-huggingface
+pinecone
+sentence-transformers
 python-dotenv
