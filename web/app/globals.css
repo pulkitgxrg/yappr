@@ -1,23 +1,31 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
-
-  --color-ink: #14120f;
-  --color-ink-soft: #2c2823;
-  --color-muted: #6f675e;
-  --color-faint: #9a9288;
-  --color-paper: #f4f0e8;
-  --color-cream: #faf7f2;
-  --color-surface: #ffffff;
-  --color-line: #e5dfd4;
-  --color-line-strong: #d4cdc0;
-  --color-ember: #c23b22;
-  --color-ember-soft: #f4e4df;
-  --color-moss: #2f6b4f;
-  --color-night: #0c111c;
-  --color-night-mid: #151d38;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-body), ui-monospace, monospace;
+  --color-void: #070708;
+  --color-shell: #0c0c0e;
+  --color-panel: #121214;
+  --color-elevated: #18181b;
+  --color-raised: #1f1f23;
+  --color-line: #2a2a2e;
+  --color-line-soft: #222226;
+  --color-ink: #f4f4f5;
+  --color-ink-soft: #d4d4d8;
+  --color-muted: #a1a1aa;
+  --color-faint: #71717a;
+  --color-teal: #2ee6c5;
+  --color-teal-dim: #14b8a6;
+  --color-teal-glow: #2ee6c533;
+  --color-chip-blue: #1a2744;
+  --color-chip-blue-text: #8ec5ff;
+  --color-chip-green: #142f24;
+  --color-chip-green-text: #7ddea0;
+  --color-chip-amber: #2f2414;
+  --color-chip-amber-text: #f0c674;
+  --color-ember: #f07167;
+  --color-ember-soft: #3a1c1a;
+  --color-moss: #34d399;
 }
 
 @layer base {
@@ -33,8 +41,6 @@
   body {
     margin: 0;
     font-family: var(--font-sans);
-    color: var(--color-ink);
-    background: var(--color-paper);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -56,7 +62,6 @@
   }
 }
 
-/* Landing backdrop only */
 .landing-bg {
   background:
     linear-gradient(
@@ -68,7 +73,6 @@
     url("/background.png") center / cover fixed;
 }
 
-/* Scribble underline on hero word */
 @keyframes draw-circle {
   to {
     stroke-dashoffset: 0;
@@ -85,7 +89,6 @@
   animation: draw-circle 0.85s 0.25s ease forwards;
 }
 
-/* Typing dots */
 @keyframes bounce-dot {
   to {
     transform: translateY(-3px);
@@ -115,19 +118,6 @@
   animation: spin 0.7s linear infinite;
 }
 
-/* Soft message entrance (used with framer when needed) */
-@keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* YouTube embed fill */
 .youtube,
 .youtube-frame {
   display: block;
@@ -136,10 +126,9 @@
   border: 0;
 }
 
-/* Scrollbar — quiet, not chrome-y */
 .messages-scroll {
   scrollbar-width: thin;
-  scrollbar-color: #d4cdc0 transparent;
+  scrollbar-color: #2a2a2e transparent;
 }
 
 .messages-scroll::-webkit-scrollbar {
@@ -147,7 +136,7 @@
 }
 
 .messages-scroll::-webkit-scrollbar-thumb {
-  background: #d4cdc0;
+  background: #2a2a2e;
   border-radius: 99px;
   border: 2px solid transparent;
   background-clip: content-box;

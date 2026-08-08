@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
+import { DM_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
-const plexSans = IBM_Plex_Sans({
+const body = DM_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-plex",
+  variable: "--font-body",
   display: "swap",
 });
 
-const plexMono = IBM_Plex_Mono({
+const mono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
-  variable: "--font-plex-mono",
+  variable: "--font-mono-body",
   display: "swap",
 });
 
@@ -25,9 +26,37 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${plexSans.variable} ${plexMono.variable} h-full antialiased`}
+      className={`${body.variable} ${mono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="flex min-h-full flex-col font-sans">
+        {children}
+        <Toaster
+          position="bottom-right"
+          toastOptions={{
+            duration: 5000,
+            style: {
+              background: "#18181b",
+              color: "#f4f4f5",
+              border: "1px solid #2a2a2e",
+              fontSize: "13px",
+            },
+            error: {
+              style: {
+                background: "#1c1010",
+                color: "#fecaca",
+                border: "1px solid rgba(240, 113, 103, 0.35)",
+              },
+            },
+            success: {
+              style: {
+                background: "#0f1a14",
+                color: "#bbf7d0",
+                border: "1px solid rgba(52, 211, 153, 0.3)",
+              },
+            },
+          }}
+        />
+      </body>
     </html>
   );
 }

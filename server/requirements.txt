@@ -1,9 +1,9 @@
 fastapi
 uvicorn[standard]
-youtube-transcript-api
+youtube-transcript-api>=1.0.0
 langchain-core
 langchain-text-splitters
 langchain-pinecone
-langchain-google-genai
+langchain-openai
 pinecone
 python-dotenv

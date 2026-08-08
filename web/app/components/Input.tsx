@@ -4,21 +4,14 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Icon from "./Icon";
-
-const apiBase =
-  process.env.NEXT_PUBLIC_YAPPR_API_URL ?? "http://localhost:8000";
+import { extractVideoId } from "../lib/youtube";
 
 export default function Input() {
   const router = useRouter();
   const [url, setUrl] = useState("");
-  const [fetching, setFetching] = useState(false);
   const [invalid, setInvalid] = useState(false);
   const [shortcut] = useState<"mac" | "windows">(() =>
-    typeof navigator !== "undefined" &&
-    /Mac|iPhone|iPad/.test(navigator.platform)
-      ? "mac"
-      : "windows",
-  );
+    typeof navigator !== "undefined" && /Mac|iPhone|iPad/.test(navigator.platform) ? "mac" : "windows");
 
   const paste = async () => {
     try {
@@ -27,35 +20,17 @@ export default function Input() {
     }
   };
 
-  const submitUrl = async (event: React.FormEvent) => {
+  const submitUrl = (event: React.FormEvent) => {
     event.preventDefault();
-    if (
-      !/^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[\w-]{6,}/.test(
-        url.trim(),
-      )
-    ) {
+
+    const videoId = extractVideoId(url);
+    if (!videoId) {
       setInvalid(true);
       window.setTimeout(() => setInvalid(false), 500);
       return;
     }
-    setFetching(true);
-    try {
-      const youtubeUrl = /^https?:\/\//.test(url) ? url : `https://${url}`;
-      const response = await fetch(`${apiBase}/videos`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url: youtubeUrl }),
-      });
-      const payload = await response.json();
-      if (!response.ok)
-        throw new Error(payload.detail ?? "We couldn't process that video.");
-      router.push(`/chat/${payload.video_id}`);
-    } catch {
-      setInvalid(true);
-      window.setTimeout(() => setInvalid(false), 2600);
-    } finally {
-      setFetching(false);
-    }
+
+    router.push(`/chat/${videoId}`);
   };
 
   return (
@@ -65,10 +40,6 @@ export default function Input() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
-      <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.18em] text-white/55">
-        Transcript-native chat
-      </p>
-
       <h1 className="max-w-[18ch] text-[clamp(2.4rem,6.5vw,3.75rem)] font-semibold leading-[1.08] tracking-[-0.04em]">
         Ask anything about any video,{" "}
         <span className="relative inline-block opacity-90">
@@ -85,8 +56,7 @@ export default function Input() {
       </h1>
 
       <p className="mt-5 max-w-md text-[15px] leading-relaxed text-white/70">
-        Paste a YouTube link. Yappr reads the transcript so you can search
-        moments, claims, and details in plain language.
+        Paste a YouTube link, let our AI to analyze the video and answer your questions about it :)
       </p>
 
       <motion.form
@@ -95,7 +65,7 @@ export default function Input() {
         animate={invalid ? { x: [-8, 8, -5, 5, 0] } : undefined}
         transition={invalid ? { duration: 0.4 } : undefined}
       >
-        <div className="flex flex-col gap-2 rounded-2xl border border-white/20 bg-white/[0.09] p-2 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.55)] backdrop-blur-md sm:flex-row sm:items-center">
+        <div className="flex flex-col gap-2 rounded-2xl border border-white/20 bg-white/[0.09] p-2 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.55)] sm:flex-row sm:items-center">
           <div className="flex min-w-0 flex-1 items-center gap-3 px-3 py-2 text-white/75">
             <Icon name="paste" size={18} />
             <input
@@ -134,35 +104,20 @@ export default function Input() {
           </div>
 
           <button
-            className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 text-[14px] font-semibold text-night transition hover:bg-white/92 disabled:opacity-80"
+            className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 text-[14px] font-semibold text-[#0c111c] transition hover:bg-white/92"
             type="submit"
-            disabled={fetching}
           >
-            {fetching ? (
-              <>
-                <span className="spin size-3.5 rounded-full border-2 border-night/25 border-t-night" />
-                Fetching transcript…
-              </>
-            ) : (
-              <>
-                Start chatting
-                <Icon name="arrow" size={17} />
-              </>
-            )}
+            Start chatting
+            <Icon name="arrow" size={17} />
           </button>
         </div>
 
         {invalid && (
           <p className="absolute left-1 right-1 top-full mt-2 text-left text-[12px] text-rose-200 sm:text-center">
-            Couldn&apos;t process that link. Check the URL and make sure the API
-            is running.
+            That doesn&apos;t look like a valid YouTube link.
           </p>
         )}
       </motion.form>
-
-      <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.14em] text-white/45">
-        Private to this session · No account required
-      </p>
     </motion.section>
   );
 }
