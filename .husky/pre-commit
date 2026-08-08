@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+set -e
+
+cd web
+npm run lint
+
+cd ../server
+python3 -m py_compile main.py
