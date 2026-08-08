@@ -12,6 +12,8 @@ Chat with any YouTube video. Yappr pulls the video's transcript, embeds it into 
 - [Setup](docs/SETUP.md)
 - [Contributing](docs/CONTRIBUTION.md)
 - [Security](docs/SECURITY.md)
+- [Issue template](.github/ISSUE_TEMPLATE/bug_report.yml)
+- [Pull request template](.github/PULL_REQUEST_TEMPLATE.md)
 
 ## Tech stack
 - NextJS: Used to make UI for web

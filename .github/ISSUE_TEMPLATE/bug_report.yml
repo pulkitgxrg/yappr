@@ -1,0 +1,48 @@
+name: Bug report
+description: Report a problem with Yappr.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. Please fill out the form below so we can reproduce it quickly.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Describe the bug in a sentence or two.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: List the exact steps needed to reproduce the issue.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What actually happened?
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser, OS, and any relevant setup details.
+  - type: textarea
+    id: extra
+    attributes:
+      label: Additional context
+      description: Add logs, screenshots, or anything else that may help.
