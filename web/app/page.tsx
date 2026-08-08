@@ -1,14 +1,21 @@
 "use client";
 
 import Input from "./components/Input";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="app">
-      <div className="backdrop" />
-      
-      <nav className="brand">
-        <span>YAPPR!</span>
+    <main className="landing-bg relative min-h-svh overflow-hidden text-white">
+      <nav className="relative z-10 mx-auto flex h-[72px] w-full max-w-[1100px] items-center justify-between px-6">
+        <Link href="/" className="flex items-center gap-2.5 font-semibold tracking-tight">
+          <span className="relative grid size-7 place-items-center rounded-md bg-white/95 text-night">
+            <span className="ml-0.5 border-y-[5px] border-l-[7px] border-y-transparent border-l-night" />
+          </span>
+          <span className="text-[15px]">Yappr</span>
+        </Link>
+        <span className="hidden font-mono text-[11px] uppercase tracking-[0.16em] text-white/55 sm:block">
+          Video → conversation
+        </span>
       </nav>
 
       <Input />

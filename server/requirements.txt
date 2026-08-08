@@ -4,7 +4,6 @@ youtube-transcript-api
 langchain-core
 langchain-text-splitters
 langchain-pinecone
-langchain-huggingface
+langchain-google-genai
 pinecone
-sentence-transformers
 python-dotenv
