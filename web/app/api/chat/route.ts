@@ -15,6 +15,7 @@ async function errorDetail(response: Response): Promise<string> {
     if (typeof json.detail === "string") return json.detail;
   } catch {
   }
+  
   return text.slice(0, 400);
 }
 

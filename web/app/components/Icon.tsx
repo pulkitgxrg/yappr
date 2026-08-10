@@ -1,4 +1,4 @@
-type IconName = "arrow" | "paste" | "send" | "play" | "sparkle" | "plus";
+type IconName = "arrow" | "paste" | "send" | "play" | "plus";
 
 export default function Icon({
   name,
@@ -18,9 +18,6 @@ export default function Icon({
     ),
     send: <path d="m21 3-7.6 18-3.7-7.7L2 9.6 21 3ZM9.7 13.3 15 8" />,
     play: <path d="m9 7 8 5-8 5V7Z" fill="currentColor" stroke="none" />,
-    sparkle: (
-      <path d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3ZM19 16l.7 2.3L22 19l-2.3.7L19 22l-.7-2.3L16 19l2.3-.7L19 16Z" />
-    ),
     plus: <path d="M12 5v14M5 12h14" />,
   };
   return (
